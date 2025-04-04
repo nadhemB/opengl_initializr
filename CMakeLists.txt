@@ -4,10 +4,10 @@ project(OpenGLInitializr)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# Force static link for GLFW
 option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
 option(GLFW_BUILD_DOCS OFF)
+# Force static link for GLFW
 option(GLFW_BUILD_SHARED_LIBS OFF)
 
 # Add submodules
@@ -26,10 +26,10 @@ include_directories(
 find_package(OpenGL REQUIRED)
 
 # Executable
-add_executable(opengl_initializer main.cpp)
+add_executable(OpenGLInitializr main.cpp)
 
 # Link everything statically
-target_link_libraries(OpenGLProject
+target_link_libraries(OpenGLInitializr
     glfw
     glad
     ${CMAKE_DL_LIBS}
@@ -38,5 +38,5 @@ target_link_libraries(OpenGLProject
 
 # Windows-specific static OpenGL
 if(WIN32)
-    target_link_libraries(OpenGLProject opengl32)
+    target_link_libraries(OpenGLInitializr opengl32)
 endif()
