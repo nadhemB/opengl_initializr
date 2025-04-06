@@ -25,8 +25,9 @@ include_directories(
 # OpenGL core is always needed
 find_package(OpenGL REQUIRED)
 
-# Executable
-add_executable(OpenGLInitializr main.cpp)
+
+file(GLOB_RECURSE SRC_FILES src/*.cpp)
+add_executable(OpenGLInitializr ${SRC_FILES} )
 
 # Link everything statically
 target_link_libraries(OpenGLInitializr
@@ -36,7 +37,16 @@ target_link_libraries(OpenGLInitializr
     OpenGL::GL
 )
 
+
+
 # Windows-specific static OpenGL
 if(WIN32)
     target_link_libraries(OpenGLInitializr opengl32)
 endif()
+
+add_custom_command(
+    TARGET OpenGLInitializr POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/assets
+            $<TARGET_FILE_DIR:OpenGLInitializr>/assets
+)
